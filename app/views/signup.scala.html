@@ -1,0 +1,57 @@
+@()
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    <title>Signup</title>
+</head>
+<body >
+<div class="container-fluid">
+    <div class="row" style="height:100px;background-color:#19150A;text-align:center">
+        <h1 style="color:white">Create an Account</h1>
+    </div>
+    <div class="row" style="background-color:#F9BD35" >
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4" style="text-align:center;margin-top:50px">
+<form action="@routes.SignupController.processform" method="post">
+    <div class="form-group">
+    <input type="text" name="firstname"  class="form-control" placeholder="Firstname" required>
+    </div>
+        <div class="form-group">
+    <input type="text" name="middlename" class="form-control" placeholder="Middlename" >
+        </div>
+            <div class="form-group">
+    <input type="text" name="lastname" placeholder="Lastname" class="form-control" required>
+            </div>
+                <div class="form-group">
+    <input type="email" name="email" placeholder="Email" class="form-control" required>
+                </div>
+                    <div class="form-group">
+    <input type="password" name="password" placeholder="Password" class="form-control" required>
+                    </div>
+                        <div class="form-group">
+    <input type="password" name="confirmPassword" placeholder="Re-enter Password" class="form-control" required>
+                        </div>
+                            <div class="form-group">
+    <input type="text" name="age" placeholder="age" class="form-control" required>
+                            </div>
+                                <div class="form-group">
+    <input type="text" name="mobile" placeholder="Mobile" class="form-control" required>
+                                </div>
+                                    <div class="radio">
+    <input type="radio" name="gender" value="male" checked>Male<br>
+    <input type="radio" name="gender" value="female"> Female<br>
+                                    </div>
+    <input type="submit" class="btn btn-success">
+
+
+</form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+</body>
+</html>

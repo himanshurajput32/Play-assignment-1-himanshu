@@ -1,0 +1,38 @@
+@(user:List[Any],request: play.api.mvc.RequestHeader)
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+    <title>Title</title>
+</head>
+<body>
+@if(request.session.get("email")){
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <h1>Name:@{user(0)+" "+user(2)}</h1>
+            <h1>Email: @user(3)</h1>
+            <h1>Mobile: @user(5)</h1>
+            <h1>Gender: @user(6)</h1>
+            <h1>Age: @user(7)</h1>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    <div class="row" style="text-align:center">
+        <button class="btn btn-success"><a href="/logout">Logout</a></button>
+    </div>
+</div>
+}else{
+
+
+@login()
+
+}
+</body>
+</html>
