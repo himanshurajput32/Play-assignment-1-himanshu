@@ -1,0 +1,56 @@
+@import services._
+@(list:List[User],request: play.api.mvc.RequestHeader)
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
+    <title>AdminControl</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1">
+            <h2>Name</h2>
+        </div>
+        <div class="col-md-3">
+            <h2>Email</h2>
+        </div>
+        <div class="col-md-1">
+            <h2>Mobile</h2>
+        </div>
+        <div class="col-md-1">
+            <h2>Gender</h2>
+        </div>
+        <div class="col-md-1">
+            <h2>Age</h2>
+        </div>
+    </div>
+    @for(ls<-list){
+    <div class="row">
+        <div class="col-md-1">
+            <p>@{ls.firstname+" "+ls.lastname}</p>
+        </div>
+        <div class="col-md-3">
+            <p>@ls.email</p>
+        </div>
+        <div class="col-md-1">
+            <p>@ls.mobile</p>
+        </div>
+        <div class="col-md-1">
+            <p>@ls.gender</p>
+        </div>
+        <div class="col-md-1">
+            <p>@ls.age</p>
+        </div>
+        <div class="col-md-1">
+            <button><a href="/remove">Suspend</a></button>
+        </div>
+        <div class="col-md-1">
+            <button><a href="/sustain">Suspend</a></button>
+        </div>
+
+    </div>
+    }
+</div>
+</body>
+</html>
