@@ -2,23 +2,39 @@ package services
 
 import javax.inject.Inject
 
-import models.User
+import models.{User, UserData}
+import play.api.cache
 import play.api.cache.CacheApi
 
 import scala.collection.mutable.ListBuffer
+import scala.concurrent.duration.Duration
 
 /**
   * Created by knoldus on 7/3/17.
   */
+trait MyService {
+  def checkUserAvailability(email: String): Boolean
 
-class UserStorage  {
-val users=ListBuffer[User]()
+  def md5Hash(text: String): String
+
+  def addUser(user: User): CacheApi
+
+  def findUser(email: String): User
+
+  def remove(email: String): CacheApi
+}
+
+
+
+class UserStorage @Inject()(cache:CacheApi) extends MyService {
+
   def checkUserAvailability(email: String): Boolean = {
-    val user=users.toList.filter(_.email==email)
-    if(user==Nil)
-      true
+   val user=cache.get[User](email)
+    if(user==Some(User)){
+     return false
+    }
     else
-      false
+    return true
   }
 
   //Encryption Method
@@ -28,27 +44,30 @@ val users=ListBuffer[User]()
     _ + _
   }
 
-  def addUser(user: User):List[User] = {
+  def addUser(user: User):CacheApi= {
     if (checkUserAvailability(user.email)) {
-      val password_new = md5Hash(user.password)
-      val user_new = user.copy(password = password_new)
-      users +=user_new
+      println(user)
+      val user_new=user.copy(password=md5Hash(user.password))
+      println(user_new)
+      UserData.userEmails.append(user.email)
+      cache.set(user.email, user_new)
+      println(cache)
     }
-    println(users)
-users.toList
+    cache
   }
 
-  def findUser(email: String):List[User]= {
-    println(users)
-    val user=users.filter(_.email==email)
+  def findUser(email: String):User = {
+    val userDemo=User("demo","demo","demo","abc@m.com","dddd",1,"dd",11,false)
+    val user=cache.getOrElse[User](email)(userDemo)
     println(user)
-    user.toList
+    user
   }
 
-  def remove(email:String):List[User]={
-    val user=users.filter(_.email==email)
-    users -=user.head
-   users.toList
+  def remove(email: String):CacheApi = {
+    UserData.userEmails -=email
+    cache.remove(email)
+    cache
   }
 
 }
+

@@ -2,16 +2,14 @@ package controllers
 
 import javax.inject.Inject
 
-import models.{User, UserData, authorizedUser}
-import play.api.data.Form
-import play.api.data.Forms._
+import models.UserData
+import play.api.Configuration
 import play.api.mvc.{Action, Controller}
-import services.UserStorage
-
+import services.{MyService, UserStorage}
 /**
   * Created by knoldus on 6/3/17.
   */
-class LoginController @Inject()(service:UserStorage) extends Controller {
+class LoginController @Inject()(service:MyService) extends Controller {
 
 
   def login = Action {
@@ -24,11 +22,13 @@ class LoginController @Inject()(service:UserStorage) extends Controller {
       },
       Data => {
 
-        if(service.checkUserAvailability(Data.email)){
+        if(!service.checkUserAvailability(Data.email)){
+          println("error 2")
           Redirect(routes.LoginController.login()).flashing("msg"->"user not found")
         }
 
         else {
+          println("error 3")
           Redirect(routes.ProfileController.home(Data.email,Data.password)).withSession("email"->Data.email)
         }
       })

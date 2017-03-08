@@ -3,8 +3,9 @@ package controllers
 import javax.inject.Inject
 
 import models.{User, UserData}
+import play.api.Configuration
 import play.api.cache.CacheApi
-import services.UserStorage
+import services.{MyService, UserStorage}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{Action, Controller}
@@ -12,7 +13,7 @@ import play.api.mvc.{Action, Controller}
 /**
   * Created by knoldus on 6/3/17.
   */
-class SignupController  @Inject()(service:UserStorage) extends Controller {
+class SignupController  @Inject()(service:MyService) extends Controller {
 
 
   def signup = Action {implicit request=>

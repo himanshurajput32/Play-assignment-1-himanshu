@@ -3,6 +3,8 @@ package models
 import play.api.data.Form
 import play.api.data.Forms._
 
+import scala.collection.mutable.ListBuffer
+
 
 /**
   * Created by knoldus on 6/3/17.
@@ -31,4 +33,5 @@ object UserData {
       "password" -> text
     )(authorizedUser.apply)(authorizedUser.unapply)
   )
+  val userEmails=new ListBuffer[String]()
 }
