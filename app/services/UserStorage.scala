@@ -44,6 +44,7 @@ users.toList
     println(user)
     user.toList
   }
+
   def remove(email:String):List[User]={
     val user=users.filter(_.email==email)
     users -=user.head
