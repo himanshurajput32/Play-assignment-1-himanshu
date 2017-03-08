@@ -31,7 +31,7 @@ class SignupController  @Inject()(service:UserStorage) extends Controller {
         }
         else {
           service.addUser(Data)
-          Redirect(routes.ProfileController.home(Data.email)).withSession("email"->Data.email)
+          Redirect(routes.ProfileController.home(Data.email,Data.password)).withSession("email"->Data.email)
 
         }
       })

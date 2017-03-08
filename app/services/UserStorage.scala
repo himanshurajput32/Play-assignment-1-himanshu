@@ -10,6 +10,7 @@ import scala.collection.mutable.ListBuffer
 /**
   * Created by knoldus on 7/3/17.
   */
+
 class UserStorage  {
 val users=ListBuffer[User]()
   def checkUserAvailability(email: String): Boolean = {
@@ -27,23 +28,26 @@ val users=ListBuffer[User]()
     _ + _
   }
 
-  def addUser(user: User) = {
+  def addUser(user: User):List[User] = {
     if (checkUserAvailability(user.email)) {
       val password_new = md5Hash(user.password)
       val user_new = user.copy(password = password_new)
-      users.append(user_new)
+      users +=user_new
     }
-
+    println(users)
+users.toList
   }
 
   def findUser(email: String):List[User]= {
+    println(users)
     val user=users.filter(_.email==email)
+    println(user)
     user.toList
   }
-  def remove(email:String)={
+  def remove(email:String):List[User]={
     val user=users.filter(_.email==email)
-    users -=user(0)
-
+    users -=user.head
+   users.toList
   }
 
 }

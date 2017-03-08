@@ -29,7 +29,7 @@ class LoginController @Inject()(service:UserStorage) extends Controller {
         }
 
         else {
-          Redirect(routes.ProfileController.home(Data.email)).withSession("email"->Data.email)
+          Redirect(routes.ProfileController.home(Data.email,Data.password)).withSession("email"->Data.email)
         }
       })
   }

@@ -11,7 +11,7 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /login                             controllers.LoginController.login
 GET    /signup                             controllers.SignupController.signup
 POST   /sign                              controllers.SignupController.processform
-GET    /home                             controllers.ProfileController.home(email:String)
+GET    /home                             controllers.ProfileController.home(email:String,password:String)
 POST   /log                                controllers.LoginController.processform
 GET   /logout                            controllers.ProfileController.logout
 GET   /remove/:email                            controllers.ProfileController.remove(email:String)
