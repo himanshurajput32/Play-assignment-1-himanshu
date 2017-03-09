@@ -8,29 +8,9 @@ import play.api.test.Helpers.{contentAsString, _}
  * You can mock out a whole application including requests, plugins etc.
  * For more information, consult the wiki.
  */
-class ApplicationSpec extends PlaySpec with OneAppPerTest {
+class ControllerSpec extends PlaySpec with OneAppPerTest {
 
-  "Routes" should {
 
-    "send 404 on a bad request" in  {
-      route(app, FakeRequest(GET, "/boum")).map(status(_)) mustBe Some(NOT_FOUND)
-    }
-
-    "Should test /login" in  {
-     val result= route(app, FakeRequest(GET, "/login")).get
-      status(result) mustBe OK
-      contentType(result) mustBe Some("text/html")
-      contentAsString(result) must include ("Login")
-    }
-
-    "Should check /signup" in  {
-      val result= route(app, FakeRequest(GET, "/signup")).get
-      status(result) mustBe OK
-      contentType(result) mustBe Some("text/html")
-      contentAsString(result) must include ("Create an Account")
-    }
-
-  }
 
   "HomeController" should {
 

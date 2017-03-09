@@ -31,7 +31,7 @@ class UserStorage @Inject()(cache: CacheApi) extends MyService {
 
   def checkUserAvailability(email: String): Boolean = {
     val user = cache.get[User](email)
-    if (user == Some(User)) {
+    if (user.contains(User)) {
       false
     }
     else
@@ -45,14 +45,13 @@ class UserStorage @Inject()(cache: CacheApi) extends MyService {
     _ + _
   }
 
-  def addUser(user: User):Boolean = {
+  def addUser(user: User): Boolean = {
     if (checkUserAvailability(user.email)) {
-      println(user)
+
       val user_new = user.copy(password = md5Hash(user.password))
-      println(user_new)
+
       UserData.userEmails.append(user.email)
       cache.set(user.email, user_new)
-      println(cache)
       true
     }
     else
