@@ -2,13 +2,7 @@
 @(user:List[Any],request: play.api.mvc.RequestHeader)
 
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
-    <title>Title</title>
-</head>
-<body>
+@main("Home"){
 @if(request.session.get("email")){
 
 <div class="container">
@@ -34,8 +28,5 @@
     </div>
     }
 </div>
-}else{
-@login()
 }
-</body>
-</html>
+}

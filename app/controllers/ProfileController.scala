@@ -4,9 +4,8 @@ import javax.inject.Inject
 
 import models.{User, UserData}
 import play.api.cache.CacheApi
-import play.api.{Configuration, cache}
 import play.api.mvc.{Action, Controller}
-import services.{MyService, UserStorage}
+import services.{MyService}
 
 import scala.collection.mutable.ListBuffer
 
@@ -15,7 +14,7 @@ import scala.collection.mutable.ListBuffer
   */
 class ProfileController @Inject()(cache: CacheApi, service: MyService) extends Controller {
 
-  def logout = Action {
+  def logout = Action {implicit request=>
     Ok(views.html.login()).withNewSession
   }
 
@@ -29,26 +28,36 @@ class ProfileController @Inject()(cache: CacheApi, service: MyService) extends C
     Ok(views.html.maintenance(users.toList, request))
   }
 
-  def remove(email: String) = Action { implicit request =>
-    service.remove(email)
+  def suspend(email: String) = Action { implicit request =>
+    service.suspend(email)
     Redirect(routes.ProfileController.adminHome())
+  }
+  def resume(email:String)=Action{implicit request=>
+    service.resume(email)
+    Redirect(routes.ProfileController.adminHome())
+
   }
 
 
   def home(email: String, password: String) = Action { implicit request =>
 
-    if (service.findUser(email) != User("demo", "demo", "demo", "abc@m.com", "dddd", 1, "dd", 11, false)) {
+    if (service.findUser(email) != User("demo", "demo", "demo", "abc@m.com", "dddd", 1, "dd", 11, false,false)) {
       val user = service.findUser(email)
       if (user.password == service.md5Hash(password)) {
-        val list = user.productIterator.toList
-        Ok(views.html.profile(list, request))
+        if(user.isSuspend==true){
+          Redirect(routes.LoginController.login()).flashing("msg"->"User Suspended")
+        }
+        else {
+          val list = user.productIterator.toList
+          Ok(views.html.profile(list, request))
+        }
       }
       else {
         Redirect(routes.LoginController.login()).flashing("msg" -> "pssword or email incorrect")
       }
     }
     else {
-      Ok("USer not exists")
+      Redirect(routes.LoginController.login()).flashing("msg"->"User not found")
     }
 
   }

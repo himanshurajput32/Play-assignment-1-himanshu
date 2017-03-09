@@ -2,12 +2,9 @@ package controllers
 
 import javax.inject.Inject
 
-import models.{User, UserData}
-import play.api.Configuration
-import play.api.cache.CacheApi
-import services.{MyService, UserStorage}
-import play.api.data.Form
-import play.api.data.Forms._
+import models.{ UserData}
+import services.{MyService}
+
 import play.api.mvc.{Action, Controller}
 
 /**

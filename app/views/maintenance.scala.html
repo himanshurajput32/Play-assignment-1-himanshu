@@ -1,12 +1,6 @@
 @import services._
 @(list:List[User],request: play.api.mvc.RequestHeader)
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
-    <title>AdminControl</title>
-</head>
-<body>
+@main("Admin Home"){
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-1">
@@ -43,15 +37,14 @@
             <p>@ls.age</p>
         </div>
         <div class="col-md-1">
-            <button><a href="/remove/@ls.email">Suspend</a></button>
+            <button><a href="/suspend/@ls.email">Suspend</a></button>
         </div>
         <div class="col-md-1">
-            <button><a href="">Suspend</a></button>
+            <button><a href="/resume/@ls.email">Resume</a></button>
         </div>
 
     </div>
     }
-    
+
 </div>
-</body>
-</html>
+}

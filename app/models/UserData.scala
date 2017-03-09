@@ -11,7 +11,7 @@ import scala.collection.mutable.ListBuffer
   */
 case class authorizedUser(email: String, password: String)
 
-case class User(firstname: String, middlename: String, lastname: String, email: String, password: String, mobile: Int, gender: String, age: Int, userRole: Boolean)
+case class User(firstname: String, middlename: String, lastname: String, email: String, password: String, mobile: Int, gender: String, age: Int, userRole: Boolean,isSuspend:Boolean)
 
 object UserData {
   val signUp: Form[User] = Form(
@@ -24,7 +24,8 @@ object UserData {
       "mobile" -> number,
       "gender" -> text,
       "age" -> number,
-      "userRole" -> boolean
+      "userRole" -> boolean,
+      "isSuspend"->boolean
     )(User.apply)(User.unapply)
   )
   val login_in: Form[authorizedUser] = Form(

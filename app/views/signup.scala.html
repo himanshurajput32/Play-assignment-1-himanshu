@@ -1,16 +1,12 @@
-@()
+@()(implicit flash:Flash)
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.min.css")">
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
-    <title>Signup</title>
-</head>
-<body >
+@main("Signup"){
 <div class="container-fluid">
     <div class="row" style="height:100px;background-color:#19150A;text-align:center">
         <h1 style="color:white">Create an Account</h1>
+    </div>
+    <div class="row" style="height:100px;background-color:#19150A;text-align:center">
+        <h2 style="color:white">@flash.get("msg")</h2>
     </div>
     <div class="row" style="background-color:#F9BD35" >
         <div class="col-md-4">
@@ -61,5 +57,4 @@
         <div class="col-md-4"></div>
     </div>
 </div>
-</body>
-</html>
+}

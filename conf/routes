@@ -14,5 +14,6 @@ POST   /sign                              controllers.SignupController.processfo
 GET    /home                             controllers.ProfileController.home(email:String,password:String)
 POST   /log                                controllers.LoginController.processform
 GET   /logout                            controllers.ProfileController.logout
-GET   /remove/:email                            controllers.ProfileController.remove(email)
+GET   /suspend/:email                            controllers.ProfileController.suspend(email)
 GET   /admin                             controllers.ProfileController.adminHome
+GET   /resume/:email                            controllers.ProfileController.resume(email)
